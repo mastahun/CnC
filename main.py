@@ -159,6 +159,16 @@ def composite(**kwargs):
     timed = []
     name = str(kwargs["name"])
     n = 0
+
+    parsed_name = ""
+
+    for teach in name:
+        if teach == '’':
+            parsed_name += '\''
+        else:
+            parsed_name += teach
+
+    name = parsed_name
     if len(name) < 14:
         while name != "":
             x = name[0]
@@ -264,10 +274,12 @@ def composite(**kwargs):
 
             words = []
 
-            frame_box = [240, 100]
+            if kwargs["type"] != "Spell":
+                frame_box = [215, 80]
+            else:
+                frame_box = [215, 140]
 
             w = diss(text)
-            print(w)
             is_fat = False
 
             for word in w:
@@ -302,7 +314,7 @@ def composite(**kwargs):
                         xy[1] += 5 + draw.textsize("A", font=fonts[False])[1]
 
                 if xy[1] > frame_box[1]:
-                    font_size = font_size - 5
+                    font_size = font_size - 1
                     for arw in words:
                         arw[2] = []
 

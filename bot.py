@@ -2,6 +2,7 @@ import main
 import PIL
 import discord
 from discord.ext import commands
+import random
 
 from urllib.request import Request, urlopen
 
@@ -15,7 +16,7 @@ bot = commands.Bot(command_prefix='!', description="Welcome to the Arena! Meet C
 
 TYPES = ["Unit", "Building", "Spell"]
 RARITIES = ["Common", "Rare", "Epic", "Legendary"]
-FRACTIONS = ["Neutral", "Crusader", "Pirate", "Viking", "Ninja", "Warlock", "Druid", "Hentai"]
+FRACTIONS = ["Neutral", "Crusader", "Pirate", "Viking", "Ninja", "Warlock", "Druid", "Hentai", "Candy"]
 WEAPONS = ["Melee", "Ranged"]
 
 
@@ -60,6 +61,23 @@ async def fail(ctx):
     await ctx.send("YOU FAILED!", file=discord.File("rick.png"))
 
 
+quotes = ["Want something to be done good? Do it yourself!",
+          "Sometimes you have to do what you have to do.",
+          "I only know that I don't know anything.",
+          "The night is darkest before dawn.",
+          "It takes a dragon to kill a rat.",
+          "No matter what wind cannot bow a Mountain.",
+          "A stiff branch cannot dance in the wind, for it would snap.",
+          "A fire is of anger, it dances with beauty, but will burn you the closer you get.",
+          "Harden your hearts, as there are yet goals to reach and difficulties to overcome."]
+
+
+@bot.command(pass_context=True)
+async def quote(ctx):
+
+    await ctx.send(quotes[random.randint(0, len(quotes) - 1)])
+
+
 @bot.command(pass_context=True)
 async def card(ctx, name):
     def prs(s):
@@ -84,7 +102,7 @@ async def card(ctx, name):
         t = ""
 
         for it in s:
-            if it == '"':
+            if it == '"' or it == '”' or it == '“':
                 if not ignore:
                     x.append(t)
                     t = ""
@@ -119,6 +137,7 @@ async def card(ctx, name):
         stats["picture"] = 'default.png'
         await ctx.send("Mah man, u forgot the picture")
 
+
     red = dis(text)
     if len(red) > 3:
         race = red[3]
@@ -128,6 +147,8 @@ async def card(ctx, name):
         card_text = red[5]
     else:
         card_text = None
+
+    print(red)
 
     red = red[2].split("\n")[1:]
     name = name
