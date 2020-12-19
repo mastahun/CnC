@@ -7,7 +7,7 @@ import random
 from urllib.request import Request, urlopen
 
 
-TOKEN = "NzY2MjYyMzU3NjU1MDI3NzEy.X4gzbg.tm8t3L3UMVsTPpoDt6nGfJPICNk"
+TOKEN = open("token.txt", "r").read()
 
 
 bot = commands.Bot(command_prefix='!', description="Welcome to the Arena! Meet Craxus the Undefeated!",
